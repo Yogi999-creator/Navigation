@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="icon" href="https://avin111.github.io/Hello-World/favicon.jpeg" type="image" sizes="16x16">
+
+</head>
+<body style="margin: 0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Smart Navigation</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="located.html">Explore NU </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="Marker.html">Navigate Places</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="test.html"> GeoFencing </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html"> Back </a>
+          </li>
+      </div>
+    </div>
+  </nav>
+
+    <div id="map" style="width: 100vw; height: 100vh"></div>
+    <script src="https://js.api.here.com/v3/3.1.22.0/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://js.api.here.com/v3/3.1.22.0/mapsjs-core-legacy.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://js.api.here.com/v3/3.1.22.0/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://js.api.here.com/v3/3.1.22.0/mapsjs-service-legacy.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://js.api.here.com/v3/3.1.22.0/mapsjs-mapevents.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://stuk.github.io/jszip/dist/jszip.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.min.css'>
+    <script>
+
+            const platform = new H.service.Platform ({
+                    'apikey' : 'fCu-HyXjN1q4AFNUHHm_9KK67SuGNeFqfY9-AP7v2Hk',
+                    'useCIT': true,
+                    'useHTTPS': true,
+                });
+                const map = new H.Map (
+                    document.getElementById('map'),
+                    platform.createDefaultLayers().vector.normal.map,
+                    {
+                        zoom: 15,
+                        center: { lat: 27.961809, lng: 76.401522 },
+                    }
+            );
+
+            const mapEvents = new H.mapevents.MapEvents(map);
+            const mapBehavior = new H.mapevents.Behavior(mapEvents);
+
+
+
+            //near by shop testing
+
+            const gate = new H.map.Circle({lat: 27.966162, lng: 76.400912}, 25);
+            map.addObject(gate);
+
+            const jalpilu = new H.map.Circle({lat: 27.965868, lng: 76.402353}, 25);
+            map.addObject(jalpilu);
+
+            const nep = new H.map.Circle({lat: 27.965373058051192, lng: 76.40445312326406}, 25); 
+            map.addObject(nep);
+        
+            const tpoint = new H.map.Circle({lat: 27.962827, lng: 76.402594}, 25); 
+            map.addObject(tpoint);
+            
+            const bowl = new H.map.Circle({lat: 27.961995999717438, lng: 76.40213089390144}, 60); 
+            map.addObject(bowl);
+
+            const reception = new H.map.Circle({lat: 27.961184797254877, lng: 76.40177504638268}, 30);  
+            map.addObject(reception);
+
+            const ug1 = new H.map.Circle({lat: 27.961407818267773, lng: 76.40358802252155}, 35); 
+            map.addObject(ug1);
+
+            const ug2 = new H.map.Circle({lat: 27.960275281494212, lng: 76.40389306423917}, 35);
+            map.addObject(ug2);
+
+            const nescafe = new H.map.Circle({lat: 27.960935, lng: 76.403179}, 25);
+            map.addObject(nescafe);
+            
+            const symbol = new H.map.Circle({lat: 27.963433127923924, lng: 76.4040238043696}, 35);
+            map.addObject(symbol);
+            
+
+
+            //console getting the wkt format data
+            const geometry_gate = gate.getGeometry();
+            const wkt_gate = geometry_gate.toString();
+            console.log(wkt_gate);
+
+            const geometry_jalpilu = jalpilu.getGeometry();
+            const wkt_jalpilu = geometry_jalpilu.toString();
+            console.log(wkt_jalpilu);
+
+            const geometry_nep = nep.getGeometry();
+            const wkt_nep = geometry_nep.toString();
+            console.log(wkt_nep);
+
+            const geometry_tpoint = tpoint.getGeometry();
+            const wkt_tpoint = geometry_tpoint.toString();
+            console.log(wkt_tpoint);
+
+            const geometry_bowl = bowl.getGeometry();
+            const wkt_bowl = geometry_bowl.toString();
+            console.log(wkt_bowl);
+
+            const geometry_reception = reception.getGeometry();
+            const wkt_reception = geometry_reception.toString();
+            console.log(wkt_reception);
+                        
+        
+            const geometry_nescafe = nescafe.getGeometry();
+            const wkt_nescafe = geometry_nescafe.toString();
+            console.log(wkt_nescafe);
+
+            const geometry_ug1 = ug1.getGeometry();
+            const wkt_ug1 = geometry_ug1.toString();
+            console.log(wkt_ug1);
+
+            const geometry_ug2 = ug2.getGeometry();
+            const wkt_ug2 = geometry_ug2.toString();
+            console.log(wkt_ug2);
+
+            const geometry_symbol = symbol.getGeometry();
+            const wkt_symbol = geometry_symbol.toString();
+            console.log(wkt_symbol);
+
+            //ZIP file for NU gate
+            const zip_gate = new JSZip();
+            zip_gate.file("data_gate.wkt","GATE\tWKT\n" + "gate" + "\t" + wkt_gate);
+            zip_gate.generateAsync({ type: "blob" }).then(content => {
+                var formData = new FormData();
+                formData.append("zipfile", content);
+                axios.post("https://fleet.ls.hereapi.com/2/layers/upload.json", formData, {
+                    headers: {
+                        "content-type": "multipart/form-data"
+                    },
+                    params: {
+                        "apikey" : "fCu-HyXjN1q4AFNUHHm_9KK67SuGNeFqfY9-AP7v2Hk",
+                        "layer_id": "1234"
+
+                        }
+                    }).then(result => {
+                        console.log(result);
+                    }, error => {
+                        console.error(error);
+                    });
+                }, error => {
+                    console.error(error);
+            });
+
+            //ZIP file for NEP 
+            const zip_nep = new JSZip();
+            zip_nep.file("data_nep.wkt","NEP\tWKT\n" + "nep" + "\t" + wkt_nep);
+            zip_nep.generateAsync({ type: "blob" }).then(content => {
+                var formData = new FormData();
+                formData.append("zipfile", content);
+                axios.post("https://fleet.ls.hereapi.com/2/layers/upload.json", formData, {
+                    headers: {
+                        "content-type": "multipart/form-data"
+                    },
+                    params: {
+                        "apikey" : "fCu-HyXjN1q4AFNUHHm_9KK67SuGNeFqfY9-AP7v2Hk",
+                        "layer_id": "1239"
+
+                        }
+                    }).then(result => {
+                        console.log(result);
+                    }, error => {
+                        console.error(error);
+                    });
+                }, error => {
+                    console.error(error);
+            });
+
+            //ZIP file for Aadi Annant
+            const zip_symbol = new JSZip();
+            zip_symbol.file("data_symbol.wkt","SYMBOL\tWKT\n" + "symbol" + "\t" + wkt_symbol);
+            zip_symbol.generateAsync({ type: "blob" }).then(content => {
+                var formData = new FormData();
+                formData.append("zipfile", content);
+                axios.post("https://fleet.ls.hereapi.com/2/layers/upload.json", formData, {
+                    headers: {
+                        "content-type": "multipart/form-data"
+                    },
+                    params: {
+                        "apikey" : "fCu-HyXjN1q4AFNUHHm_9KK67SuGNeFqfY9-AP7v2Hk",
+                        "layer_id": "1240"
+
+                        }
+                    }).then(result => {
+                        console.log(result);
+                    }, error => {
+                        console.error(error);
+                    });
+                }, error => {
+                    console.error(error);
+            });
+
+            //zip file for Bowl
+            const zip_bowl = new JSZip();
+            zip_bowl.file("data_bowl.wkt","BOWL\tWKT\n" + "bowl" + "\t" + wkt_bowl);
+            zip_bowl.generateAsync({ type: "blob" }).then(content => {
+                var formData = new FormData();
+                formData.append("zipfile", content);
+                axios.post("https://fleet.ls.hereapi.com/2/layers/upload.json", formData, {
+                    headers: {
+                        "content-type": "multipart/form-data"
+                    },
+                    params: {
+                        "apikey" : "fCu-HyXjN1q4AFNUHHm_9KK67SuGNeFqfY9-AP7v2Hk",
+                        "layer_id": "1233"
+
+                        }
+                    }).then(result => {
+                        console.log(result);
+                    }, error => {
+                        console.error(error);
+                    });
+                }, error => {
+                    console.error(error);
+            });
+
+            //zip file for reception
+            const zip_reception = new JSZip();
+            zip_reception.file("data_reception.wkt","RECEPTION\tWKT\n" + "reception" + "\t" + wkt_reception);
+            zip_reception.generateAsync({ type: "blob" }).then(content => {
+                var formData = new FormData();
+                formData.append("zipfile", content);
+                axios.post("https://fleet.ls.hereapi.com/2/layers/upload.json", formData, {
+                    headers: {
+                        "content-type": "multipart/form-data"
+                    },
+                    params: {
+                        "apikey" : "fCu-HyXjN1q4AFNUHHm_9KK67SuGNeFqfY9-AP7v2Hk",
+                        "layer_id": "1231"
+
+                        }
+                    }).then(result => {
+                        console.log(result);
+                    }, error => {
+                        console.error(error);
+                    });
+                }, error => {
+                    console.error(error);
+            });
+
+
+            //zip file for ug1
+            const zip_ug1 = new JSZip();
+            zip_ug1.file("data_ug1.wkt","UG1\tWKT\n" + "Ug1p" + "\t" + wkt_ug1);
+            zip_ug1.generateAsync({ type: "blob" }).then(content => {
+                var formData = new FormData();
+                formData.append("zipfile", content);
+                axios.post("https://fleet.ls.hereapi.com/2/layers/upload.json", formData, {
+                    headers: {
+                        "content-type": "multipart/form-data"
+                    },
+                    params: {
+                        "apikey" : "fCu-HyXjN1q4AFNUHHm_9KK67SuGNeFqfY9-AP7v2Hk",
+                        "layer_id": "1232"
+
+                        }
+                    }).then(result => {
+                        console.log(result);
+                    }, error => {
+                        console.error(error);
+                    });
+                }, error => {
+                    console.error(error);
+            });
+
+            //zip file for UG2
+            const zip_shop = new JSZip();
+            zip_shop.file("data_ug2.wkt","UG2\tWKT\n" + "Ug2p" + "\t" + wkt_ug2);
+            zip_shop.generateAsync({ type: "blob" }).then(content => {
+                var formData = new FormData();
+                formData.append("zipfile", content);
+                axios.post("https://fleet.ls.hereapi.com/2/layers/upload.json", formData, {
+                    headers: {
+                        "content-type": "multipart/form-data"
+                    },
+                    params: {
+                        "apikey" : "fCu-HyXjN1q4AFNUHHm_9KK67SuGNeFqfY9-AP7v2Hk",
+                        "layer_id": "1235"
+
+                        }
+                    }).then(result => {
+                        console.log(result);
+                    }, error => {
+                        console.error(error);
+                    });
+                }, error => {
+                    console.error(error);
+            });
+
+            //zip file for Road
+            const zip_road = new JSZip();
+            zip_road.file("data.wkt","TPOINT\tWKT\n" + "Tpoint" + "\t" + wkt_tpoint);
+            zip_road.generateAsync({ type: "blob" }).then(content => {
+                var formData = new FormData();
+                formData.append("zipfile", content);
+                axios.post("https://fleet.ls.hereapi.com/2/layers/upload.json", formData, {
+                    headers: {
+                        "content-type": "multipart/form-data"
+                    },
+                    params: {
+                        "apikey" : "fCu-HyXjN1q4AFNUHHm_9KK67SuGNeFqfY9-AP7v2Hk",
+                        "layer_id": "1236"
+
+                        }
+                    }).then(result => {
+                        console.log(result);
+                    }, error => {
+                        console.error(error);
+                    });
+                }, error => {
+                    console.error(error);
+            });
+
+            const zip_house = new JSZip();
+            zip_house.file("data_jalpilu.wkt","JALPILU\tWKT\n" + "Jalpilu" + "\t" + wkt_jalpilu);
+            zip_house.generateAsync({ type: "blob" }).then(content => {
+                var formData = new FormData();
+                formData.append("zipfile", content);
+                axios.post("https://fleet.ls.hereapi.com/2/layers/upload.json", formData, {
+                    headers: {
+                        "content-type": "multipart/form-data"
+                    },
+                    params: {
+                        "apikey" : "fCu-HyXjN1q4AFNUHHm_9KK67SuGNeFqfY9-AP7v2Hk",
+                        "layer_id": "1237"
+
+                        }
+                    }).then(result => {
+                        console.log(result);
+                    }, error => {
+                        console.error(error);
+                    });
+                }, error => {
+                    console.error(error);
+            });
+        
+            const zip_saloon = new JSZip();
+            zip_saloon.file("data_nescafe.wkt","NESCAFE\tWKT\n" + "Nescafe" + "\t" + wkt_nescafe);
+            zip_saloon.generateAsync({ type: "blob" }).then(content => {
+                var formData = new FormData();
+                formData.append("zipfile", content);
+                axios.post("https://fleet.ls.hereapi.com/2/layers/upload.json", formData, {
+                    headers: {
+                        "content-type": "multipart/form-data"
+                    },
+                    params: {
+                        "apikey" : "fCu-HyXjN1q4AFNUHHm_9KK67SuGNeFqfY9-AP7v2Hk",
+                        "layer_id": "1238"
+
+                        }
+                    }).then(result => {
+                        console.log(result);
+                    }, error => {
+                        console.error(error);
+                    });
+                }, error => {
+                    console.error(error);
+            });
+            
+            navigator.geolocation.watchPosition(
+                function success(pos){
+                    
+                
+                    var acc = pos.coords.accuracy;
+                    var lat = pos.coords.latitude;
+                    var lon = pos.coords.longitude;
+                    console.log(acc);
+                    console.log(lat);
+                    console.log(lon);
+                    
+                    var marker = new H.map.Marker({ lat: pos.coords.latitude, lng: pos.coords.longitude});
+                    map.addObject(marker);
+
+
+                    var geofencing = platform.getGeofencingService();
+
+                    geofencing.request(
+                        H.service.extension.geofencing.Service.EntryPoint.SEARCH_PROXIMITY,
+                        {
+                            "layer_ids": ["1231", "1232", "1233", "1234", "1235", "1236", "1237", "1238", "1239", "1240"],
+                            "proximity": lat + "," + lon,
+                            "key_attributes": ["RECEPTION", "UG1", "BOWL", "GATE", "UG2", "TPOINT", "JALPILU", "NESCAFE", "NEP", "SYMBOL"]
+                        },result => {
+                            if(result.geometries.length > 0) {
+                                if(result.geometries[0].layerId == "1231") {
+                                    Swal.fire({
+                                        title: "RECEPTION",
+                                        text: "This the reception and also the main academic building, on the left it is AC1 and on the right it is AC2.",
+                                        imageUrl: "img/reception.jpeg",
+                                        imageWidth: 1032,
+                                        imageHeight: 550,
+                                        imageAlt: "reception Image",
+                                        confirmButtonText: "okay",
+                                        confirmButtonColor: "#00ff55",
+                                        reverseButtons: true,
+                                    });
+                                    console.log(result);
+                                    
+                                }
+                                else if(result.geometries[0].layerId == "1232") {
+                                    Swal.fire({
+                                        title: "UG1",
+                                        text: "It is boys hostel. Has to phases like phase I and phase II.",
+                                        imageUrl: "img/ug1.jpg",
+                                        imageWidth: 550,
+                                        imageHeight: 225,
+                                        imageAlt: "UG1 Image",
+                                        confirmButtonText: "okay",
+                                        confirmButtonColor: "#00ff55",
+                                        reverseButtons: true,
+                                    });
+                                    console.log(result);
+                                    
+                                }
+                                else if(result.geometries[0].layerId == "1233") {
+                                    Swal.fire({
+                                        title: "BOWL Area",
+                                        text: "This is Bowl area also known as Lawn area.",
+                                        imageUrl: "img/lawn.jpeg",
+                                        imageWidth: 1032,
+                                        imageHeight: 550,
+                                        imageAlt: "lawn Image",
+                                        confirmButtonText: "okay",
+                                        confirmButtonColor: "#00ff55",
+                                        reverseButtons: true,
+                                    });
+                                    console.log(result);
+                                    
+                                }
+                                else if(result.geometries[0].layerId == "1234") {
+                                    Swal.fire({
+                                        title: "NU GATE",
+                                        text: "This is the main and only entrance into the campus.",
+                                        imageUrl: "img/gate.jpeg",
+                                        imageWidth: 840,
+                                        imageHeight: 500,
+                                        imageAlt: "gate Image",
+                                        confirmButtonText: "okay",
+                                        confirmButtonColor: "#00ff55",
+                                        reverseButtons: true,
+                                    });
+                                    console.log(result);
+                                    
+                                }
+
+                                else if(result.geometries[0].layerId == "1235") {
+                                    //swal("Reached UG2 Boys Hostel!");
+                                    Swal.fire({
+                                        title: "UG2",
+                                        text: "It is boys hostel. Has to phases like phase I and phase II.",
+                                        imageUrl: "img/ug2.jpeg",
+                                        imageWidth: 1032,
+                                        imageHeight: 550,
+                                        imageAlt: "UG2 Image",
+                                        confirmButtonText: "okay",
+                                        confirmButtonColor: "#00ff55",
+                                        reverseButtons: true,
+                                    });
+                                    console.log(result);
+                                    
+                                }
+                                else if(result.geometries[0].layerId == "1236"){
+                                    Swal.fire({
+                                        title: "T-Point",
+                                        text: "This is tpoint. From here you can go to NU reception or hostels.",
+                                        imageUrl: "img/tpoint.jpeg",
+                                        imageWidth: 1032,
+                                        imageHeight: 550,
+                                        imageAlt: "tpoint Image",
+                                        confirmButtonText: "okay",
+                                        confirmButtonColor: "#00ff55",
+                                        reverseButtons: true,
+                                    });
+                                    console.log(result);
+                                }
+                                else if(result.geometries[0].layerId == "1237"){
+                                    Swal.fire({
+                                        title: "JAAL PILU",
+                                        text: "This is JAAL PILU. One of the oldest tree in the campus said to be there before campus was built.",
+                                        imageUrl: "img/jaal.jpeg",
+                                        imageWidth: 1032,
+                                        imageHeight: 550,
+                                        imageAlt: "jaal Image",
+                                        confirmButtonText: "okay",
+                                        confirmButtonColor: "#00ff55",
+                                        reverseButtons: true,
+                                    });
+                                    console.log(result);
+                                }
+                                else if(result.geometries[0].layerId == "1238"){
+                                    Swal.fire({
+                                        title: "Nescafe",
+                                        text: "It is a Nescafe coffe show, here you can have snacks like pizza, burger and more.",
+                                        imageUrl: "img/nescafe.jpeg",
+                                        imageWidth: 1032,
+                                        imageHeight: 550,
+                                        imageAlt: "Nescafe Image",
+                                        confirmButtonText: "okay",
+                                        confirmButtonColor: "#00ff55",
+                                        reverseButtons: true,
+                                    });
+                                    console.log(result);
+                                }
+                                else if(result.geometries[0].layerId == "1239"){
+                                    Swal.fire({
+                                        title: "NEP",
+                                        text: "This is North East Point",
+                                        imageUrl: "img/nep.jpeg",
+                                        imageWidth: 1032,
+                                        imageHeight: 550,
+                                        imageAlt: "NEP Image",
+                                        confirmButtonText: "okay",
+                                        confirmButtonColor: "#00ff55",
+                                        reverseButtons: true,
+                                    });
+                                    console.log(result);
+                                }
+                                else if(result.geometries[0].layerId == "1240"){
+                                    Swal.fire({
+                                        title: "AADI ANANT",
+                                        text: "This is NU Symbol AADI ANANT",
+                                        imageUrl: "img/symbol.jpeg",
+                                        imageWidth: 550,
+                                        imageHeight: 1000,
+                                        imageAlt: "NU symbol Image",
+                                        confirmButtonText: "okay",
+                                        confirmButtonColor: "#00ff55",
+                                        reverseButtons: true,
+                                    });
+                                    console.log(result);
+                                }
+                            
+                            }
+                        },
+                        error => {
+                            console.error(error);
+                        }
+
+                    );
+                },function error(msg){
+
+                    alert('Please enable your GPS position future.');  
+    
+            },{maximumAge:0, timeout:5000, enableHighAccuracy: true}
+            );
+
+    </script>
+        
+</body>
+</html>
+
