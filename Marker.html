@@ -1,291 +1,315 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="utf-8">
-<title>Navigation</title>
-<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
-<link href="https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.css" rel="stylesheet">
-<script src="https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.js"></script>
-<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>
-<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.css" type="text/css">
- 
-<style>
-body { margin: 0; padding: 0; }
+    <meta charset="utf-8">
+    <title>Navigation</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.js"></script>
+    <script
+        src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.js"></script>
+    <link rel="stylesheet"
+        href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.0/mapbox-gl-directions.css"
+        type="text/css">
 
-#map { position: absolute; top: 1.5cm; bottom: 0; width: 100%; }
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
 
-</style>
+        #map {
+            position: absolute;
+            top: 1.5cm;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
 
 </head>
+
 <body>
-<style>
-    .marker {
-        display: block;
-        border: none;
-        border-radius: 50%;
-        cursor: pointer;
-        padding: 0;
-    }
-</style>
+    <style>
+        .marker {
+            display: block;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            padding: 0;
+        }
+    </style>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Smart Tour</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="index.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="located.html">Explore NU</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="Marker.html">Navigate Places</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="test.html"> GeoFencing </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://yogi999-creator.github.io/Smart_Navgigation.io/"> Indoor Tour </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="index.html"> Back </a>
-          </li>
-      </div>
-    </div>
-  </nav>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Smart Tour</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="located.html">Explore NU</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Marker.html">Navigate Places</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="test.html"> GeoFencing </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://yogi999-creator.github.io/Smart_Navgigation.io/"> Indoor Tour
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"> Back </a>
+                    </li>
+            </div>
+        </div>
+    </nav>
 
 
-<div id="map"></div>
+    <div id="map"></div>
 
-<script>
-	mapboxgl.accessToken = 'pk.eyJ1IjoieW9nZXNobXVuZGhyYTI0NSIsImEiOiJja2s0NDFqcDAxaGw0MnBycnI2bzNrb2FmIn0.vvNOPwWodWpHXdmimUJ6aA';
-    const geojson = {
-        'type': 'FeatureCollection',
-        'features': [
-            {
-                'type': 'Feature',
-                'properties': {
-                    'message': 'NU Main Gate',
-                    'iconSize': [25, 25]
-                },
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [76.400912,27.966162]
-                    
-                }
-            },
-            {
-                'type': 'Feature',
-                'properties': {
-                    'message': 'Jaal Peelu',
-                    'iconSize': [25, 25]
-                },
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [76.40229,27.96590]
-                }
-            },
-            {
-                'type': 'Feature',
-                'properties': {
-                    'message': 'Apna Gav',
-                    'iconSize': [25, 25]
-                },
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [76.40189,27.96582]
-                }
-            },
-            {
-                'type': 'Feature',
-                'properties': {
-                    'message': 'NEP',
-                    'iconSize': [25, 25]
-                },
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [76.40450,27.96547]
-                }
-            },
-            {
-                'type': 'Feature',
-                'properties': {
-                    'message': 'Football / Cricket Field',
-                    'iconSize': [25, 25]
-                },
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [76.40285,27.96367]
-                }
-            },
-            {
-                'type': 'Feature',
-                'properties': {
-                    'message': 'T-Point',
-                    'iconSize': [25, 25]
-                },
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [76.402594,27.962827]
-                }
-            },
-            {
-                'type': 'Feature',
-                'properties': {
-                    'message': 'Bowl Area',
-                    'iconSize': [25, 25]
-                },
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [76.40213089390144,27.961995999717438]
-                }
-            },
-            {
-                'type': 'Feature',
-                'properties': {
-                    'message': ' AC1 - Reception',
-                    'iconSize': [25, 25]
-                },
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [76.40193,27.96130]
-                }
-            },
-          
-            {
-                'type': 'Feature',
-                'properties': {
-                    'message': 'AC2',
-                    'iconSize': [25, 25]
-                },
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [76.40251,27.96121]
-                }
-            },
-            {
-                'type': 'Feature',
-                'properties': {
-                    'message': 'UG-1',
-                    'iconSize': [25, 25]
-                },
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [76.40358802252155,27.961407818267773]
-                }
-            },
-            {
-                'type': 'Feature',
-                'properties': {
-                    'message': 'UG-2',
-                    'iconSize': [25, 25]
-                },
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [76.40389306423917,27.960275281494212]
-                }
-            },
-            {
-                'type': 'Feature',
-                'properties': {
-                    'message': 'Nescafe',
-                    'iconSize': [25, 25]
-                },
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [76.403179,27.960935]
-                }
-            },
-            {
-                'type': 'Feature',
-                'properties': {
-                    'message': 'Basketball Area',
-                    'iconSize': [25, 25]
-                },
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [76.40287,27.96098]
-                }
-            },
-            {
-                'type': 'Feature',
-                'properties': {
-                    'message': 'Infinity Symbol',
-                    'iconSize': [25, 25]
-                },
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [76.4040238043696,27.963433127923924]
-                }
-            }
-        ]
-    };
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoieW9nZXNobXVuZGhyYTI0NSIsImEiOiJja2s0NDFqcDAxaGw0MnBycnI2bzNrb2FmIn0.vvNOPwWodWpHXdmimUJ6aA';
+        const geojson = {
+            'type': 'FeatureCollection',
+            'features': [
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'message': 'NU Main Gate',
+                        'iconSize': [25, 25]
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [76.400912, 27.966162]
 
-    const map = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/mapbox/satellite-streets-v11',
-        center: { lat: 27.96300, lng: 76.40305, }, 
-        pitch: -110, 
-        bearing: 90, 
-        zoom: 16.4,
-    });
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'message': 'Jaal Peelu',
+                        'iconSize': [25, 25]
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [76.40229, 27.96590]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'message': 'Apna Gav',
+                        'iconSize': [25, 25]
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [76.40189, 27.96582]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'message': 'NEP',
+                        'iconSize': [25, 25]
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [76.40450, 27.96547]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'message': 'Football / Cricket Field',
+                        'iconSize': [25, 25]
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [76.40285, 27.96367]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'message': 'T-Point',
+                        'iconSize': [25, 25]
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [76.402594, 27.962827]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'message': 'Bowl Area',
+                        'iconSize': [25, 25]
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [76.40213089390144, 27.961995999717438]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'message': ' AC1 - Reception',
+                        'iconSize': [25, 25]
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [76.40193, 27.96130]
+                    }
+                },
 
-    // Add markers to the map.
-    for (const marker of geojson.features) {
-        // Create a DOM element for each marker.
-        const el = document.createElement('div');
-        const width = marker.properties.iconSize[0];
-        const height = marker.properties.iconSize[1];
-        el.className = 'marker';
-        el.style.backgroundImage = `url(Marker.png)`; 
-        // https://placekitten.com/g/${width}/${height}/ //
-        el.style.width = `${width}px`;
-        el.style.height = `${height}px`;
-        el.style.backgroundSize = '100%';
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'message': 'AC2',
+                        'iconSize': [25, 25]
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [76.40251, 27.96121]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'message': 'UG-1',
+                        'iconSize': [25, 25]
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [76.40358802252155, 27.961407818267773]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'message': 'UG-2',
+                        'iconSize': [25, 25]
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [76.40389306423917, 27.960275281494212]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'message': 'Nescafe',
+                        'iconSize': [25, 25]
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [76.403179, 27.960935]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'message': 'Basketball Area',
+                        'iconSize': [25, 25]
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [76.40287, 27.96098]
+                    }
+                },
+                {
+                    'type': 'Feature',
+                    'properties': {
+                        'message': 'Infinity Symbol',
+                        'iconSize': [25, 25]
+                    },
+                    'geometry': {
+                        'type': 'Point',
+                        'coordinates': [76.4040238043696, 27.963433127923924]
+                    }
+                }
+            ]
+        };
 
-        el.addEventListener('click', () => {
-            window.alert(marker.properties.message);
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/satellite-streets-v11',
+            center: { lat: 27.96300, lng: 76.40305, },
+            pitch: -110,
+            bearing: 90,
+            zoom: 16.4,
         });
 
         // Add markers to the map.
-        new mapboxgl.Marker(el)
-            .setLngLat(marker.geometry.coordinates)
-            .addTo(map);
-    }
-    
-    navigator.geolocation.getCurrentPosition( successLocation, errorLocation, {
-    enableHighAccuracy: true
-})
+        for (const marker of geojson.features) {
+            // Create a DOM element for each marker.
+            const el = document.createElement('div');
+            const width = marker.properties.iconSize[0];
+            const height = marker.properties.iconSize[1];
+            el.className = 'marker';
+            el.style.backgroundImage = `url(Marker.png)`;
+            // https://placekitten.com/g/${width}/${height}/ //
+            el.style.width = `${width}px`;
+            el.style.height = `${height}px`;
+            el.style.backgroundSize = '100%';
 
-function successLocation(position){
-    setUpMap([position.coords.longitude, position.coords.latitude])
-}
+            el.addEventListener('click', () => {
+                window.alert(marker.properties.message);
+            });
 
-function errorLocation(){
-    setUpMap([-2.28, 41.45])
-}
+            // Add markers to the map.
+            new mapboxgl.Marker(el)
+                .setLngLat(marker.geometry.coordinates)
+                .addTo(map);
+        }
 
-function setUpMap(center){
-    map.addControl(new mapboxgl.NavigationControl());
+        navigator.geolocation.getCurrentPosition(successLocation, errorLocation, {
+            enableHighAccuracy: true
+        })
 
-    map.addControl(
-        new MapboxDirections({
-        accessToken: mapboxgl.accessToken
-        }),
-        'top-left'
-        );
-}
+        function successLocation(position) {
+            setUpMap([position.coords.longitude, position.coords.latitude])
+        }
 
+        function errorLocation() {
+            setUpMap([-2.28, 41.45])
+        }
 
+        function setUpMap(center) {
+            map.addControl(new mapboxgl.NavigationControl());
+            map.addControl(new mapboxgl.GeolocateControl({
+                positionOptions: {
+                    enableHighAccuracy: true
+                },
+                trackUserLocation: true,
+                showUserHeading: true,
+            }))
 
-</script>
+            map.addControl(
+                new MapboxDirections({
+                    accessToken: mapboxgl.accessToken
+                }),
+                'top-left'
+            );
+        };
+
+    </script>
 
 </body>
+
 </html>
